@@ -18,8 +18,9 @@ function App() {
 
   return (
     <main className="flex justify-center items-center
-    bg-gradient-to-br from-yellow-200 to-blue-300 border-6 border-black
+    bg-gradient-to-b from-orange-200 to-neutral-300 border-6 border-black
     rounded-xl shadow-md h-[100vh] w-full">
+    
 
       {forecast ? (
         <Forecast data={forecast} />

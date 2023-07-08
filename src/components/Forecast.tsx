@@ -23,20 +23,33 @@ const Forecast = ({ data }: Props) => {
   return (
     <div className="w-full md:max-w-[500px] py-4 md:py-4 md:px-10 lg:px-24 h-full lg:h-auto bg-white bg-opacity-20 backdrop-blur-ls rounded drop-shadow-lg">
       <div className="mx-auto w-[300px]">
-        <section className="text-center">
-          <h2 className="text-2xl font-black">
+        <section className=" flex flex-col text-center">
+          <h2 className="text-3xl font-black py-4 text-left">
+            
             {data.name} <span className="font-thin">{data.country}</span>
+            
+            <span className="flex text-lg font-normal pl-2">
+              
+              {new Date().toLocaleDateString('en-US',
+              { weekday: 'short', month: 'short', day: 'numeric' })}
+              
+            </span>
+            
           </h2>
-          <h1 className="text-4xl font-extrabold">
-            <Degree temp={Math.round(today.main.temp)} />
-          </h1>
-          <p className="text-sm">
-            {today.weather[0].main} ({today.weather[0].description})
-          </p>
-          <p className="text-sm">
-            H: <Degree temp={Math.ceil(today.main.temp_max)} /> L:{' '}
-            <Degree temp={Math.floor(today.main.temp_min)} />
-          </p>
+          <div className="flex flex-row place-items-center justify-items-center">
+            <img
+              alt={`weather-icon-${today.weather[0].description}`}
+              src={`http://openweathermap.org/img/wn/${today.weather[0].icon}.png`}
+              className="w-40 h-40"
+            />
+            <h1 className="text-6xl font-extrabold">
+              <Degree temp={Math.round(today.main.temp)} />
+            </h1>
+          </div>
+              <p className="text-sm whitespace-nowrap">
+                {today.weather[0].main} ({today.weather[0].description})
+              </p>
+          
         </section>
 
         <section className="flex overflow-x-scroll mt-4 pb-2 mb-5">
@@ -91,20 +104,6 @@ const Forecast = ({ data }: Props) => {
             title="Humidity"
             info={`${today.main.humidity} %`}
             description={getHumidityValue(today.main.humidity)}
-          />
-          <Tile
-            icon="pop"
-            title="Precipitation"
-            info={`${Math.round(today.pop * 100)}%`}
-            description={`${getPop(today.pop)}, clouds at ${today.clouds.all}%`}
-          />
-          <Tile
-            icon="pressure"
-            title="Pressure"
-            info={`${today.main.pressure} hPa`}
-            description={` ${
-              Math.round(today.main.pressure) < 1013 ? 'Lower' : 'Higher'
-            } than standard`}
           />
           <Tile
             icon="visibility"
