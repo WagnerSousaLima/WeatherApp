@@ -1,15 +1,15 @@
 import { ChangeEvent, useEffect, useState } from "react"
 
-import { optionType } from "../types"
+import { optionType, forecastType } from "../types"
 
 const useForecast = () => {
-    const [search, setSearch] = useState<string>('')
+  const [search, setSearch] = useState<string>('')
 
   const [city, setCity] = useState<optionType | null>(null)
 
   const [options, setOptions] = useState<[]>([])
 
-  const [forecast, setForecast] = useState<null>(null)
+  const [forecast, setForecast] = useState<forecastType | null>(null)
 
   const getSearchOptions = (value: string) => {
     
@@ -23,7 +23,7 @@ const useForecast = () => {
     const value = e.target.value.trim()
     setSearch(value)
 
-    if(value ==='') return
+    if (value === '') return
 
     getSearchOptions(value)
 
@@ -31,9 +31,20 @@ const useForecast = () => {
 
   const getForecast = (city: optionType) => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${city.lat}&lon=${city.lon}&units=standart&appid=${import.meta.env.VITE_REACT_APP_API_KEY}`
-    ).then(res => res.json()).then(data => setForecast(data))
-  }
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${city.lat}&lon=${city.lon}&units=standart&appid=${import.meta.env.VITE_REACT_APP_API_KEY}`
+    )
+      .then(res => res.json())
+      .then(data => {
+        
+        const forecasData = {
+          ...data.city,
+          list: data.list.slice(0,16),
+        }
+        
+        
+        setForecast(forecasData)
+  })
+}
 
   const onSubmit = () => {
     if (!city) return

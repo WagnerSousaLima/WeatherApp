@@ -1,5 +1,6 @@
 
 import Search from "./components/Search";
+import Forecast from "./components/Forecast";
 import useForecast from "./hooks/useForecast";
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
     search,
     onOptionSelect,
     onSubmit,
-    onInputChange,
+    onInputChange, 
   } = useForecast()
 
   
@@ -21,7 +22,7 @@ function App() {
     rounded-xl shadow-md h-[100vh] w-full">
 
       {forecast ? (
-        'we have a forecast'
+        <Forecast data={forecast} />
       ) : (
           
         <Search
