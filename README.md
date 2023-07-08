@@ -1,6 +1,9 @@
-<h1 align="center"> Waether App</h1>
-<img align="center" alt=banner-principal src="src/assets/banner.png">
 
+<div align="center">
+<h1 align="center"> Waether App </h1>
+<img align="center" alt=banner-principal src="src/assets/banner.png">
+  
+</div>
 
 <br>
 <div align="center">
