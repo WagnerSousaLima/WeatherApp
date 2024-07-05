@@ -1,5 +1,6 @@
 <h1 align="center"> Weather App 
 
+
 ![Banner Principal](src/assets/banner.png) </h1>
 
 <h2 align="center"> 💻 Projeto </h2>
